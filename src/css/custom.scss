@@ -36,7 +36,6 @@ html[data-theme='dark'] {
   --ifm-heading-font-family: Helvetica, 'roboto', sans-serif;
 
   --ifm-button-border-radius: 2.5em;
-  --doc-sidebar-width: 250px !important;
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
@@ -179,4 +178,11 @@ pre > code {
 .footer {
   --ifm-footer-background-color: var(--ifm-background-surface-color);
   color: currentColor;
+}
+
+.pagination-nav, .theme-doc-breadcrumbs, .theme-doc-toc-mobile {
+  font-family: var(--ifm-font-family);
+  max-width: 80ch;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
