@@ -1,0 +1,163 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+:root {
+  --ifm-color-primary: #236698;
+  --ifm-color-primary-dark: #205c89;
+  --ifm-color-primary-darker: #1e5781;
+  --ifm-color-primary-darkest: #19476a;
+  --ifm-color-primary-light: #2770a7;
+  --ifm-color-primary-lighter: #2875af;
+  --ifm-color-primary-lightest: #2e85c6;
+}
+
+html[data-theme='dark'] {
+  --ifm-color-primary: #69aadc;
+  --ifm-color-primary-dark: #4f9bd6;
+  --ifm-color-primary-darker: #4194d3;
+  --ifm-color-primary-darkest: #2b7bb8;
+  --ifm-color-primary-light: #83b9e2;
+  --ifm-color-primary-lighter: #91c0e5;
+  --ifm-color-primary-lightest: #b8d7ee;
+}
+
+:root {
+  --text-color: #213547;
+  --divider-color: rgba(60, 60, 60, 0.12);
+
+  --ifm-background-color: #ffffff;
+  --ifm-background-color-trans: rgba(255, 255, 255, 0.95);
+  --ifm-background-surface-color: #f9f9f9;
+
+  --ifm-font-family: Helvetica, 'roboto', sans-serif;
+  --ifm-heading-font-family: Helvetica, 'roboto', sans-serif;
+
+  --ifm-button-border-radius: 2.5em;
+  --doc-sidebar-width: 250px !important;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] {
+  --text-color: rgba(255, 255, 255, 0.87);
+  --divider-color: rgba(84, 84, 84, 0.48);
+
+  --ifm-background-color: #242424;
+  --ifm-background-color-trans: rgba(36, 36, 36, 0.95);
+  --ifm-background-surface-color: #1a1a1a;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  text-align: justify;
+  color: var(--text-color);
+  font-weight: 300;
+}
+
+.theme-doc-markdown {
+  max-width: 79ch;
+  font-size: 1rem;
+  margin: auto;
+  font-family: var(--ifm-font-family);
+
+  a {
+    text-decoration: underline;
+  }
+
+  h1 {
+    color: currentColor;
+  }
+
+  p {
+    margin: 1em 0;
+    line-height: 1.5em;
+  }
+
+  h1:first-child {
+    font-size: 2em;
+    margin: 0.5em 0 0;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin: 2em 0 0.67em;
+    padding-top: 1em;
+    border-top: 1px solid var(--divider-color);
+  }
+
+  h3 {
+    font-size: 1.25em;
+    margin: 1.5em 0 0;
+  }
+
+  h4, h5, h6 {
+    font-size: 1em;
+    margin: 0;
+  }
+}
+
+// Code Blocks
+:not(pre) > code {
+  font-weight: 100 !important;
+  border: none;
+  border-radius: 0.25em;
+  padding: 3px;
+}
+
+pre > code {
+  padding: 0.5em 1em !important;
+}
+
+// Footnotes
+.footnotes {
+  p {
+    font-size: .95em !important;
+    margin: 0.5em 0;
+  }
+
+  .footnote-item {
+    margin-bottom: 1.5em;
+  }
+
+  .footnote-backref {
+    font-family: monospace;
+    font-size: 1em;
+    padding-left: 0.5ch;
+  }
+}
+
+// Sidebar
+.theme-doc-sidebar-container {
+  background-color: var(--ifm-background-surface-color);
+
+  .theme-doc-sidebar-menu * {
+    font-size: 0.9rem;
+  }
+
+  .theme-doc-sidebar-item-category * {
+    font-weight: 600;
+  }
+
+  .theme-doc-sidebar-item-category-level-1 {
+    border-top: var(--divider-color) solid 1px;
+  }
+
+  .theme-doc-sidebar-item-link * {
+    font-weight: normal;
+  }
+}
+
+// Navbar
+.navbar {
+  background-color: var(--ifm-background-color-trans);
+}
+
+// Fixes hardcoded footer colour in dark mode
+.footer {
+  --ifm-footer-background-color: var(--ifm-background-surface-color);
+  color: currentColor;
+}

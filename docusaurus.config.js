@@ -1,0 +1,101 @@
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
+
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/oceanicNext');
+
+const math = require('remark-math');
+const katex = require('rehype-katex');
+
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+    title: 'LateNights',
+    url: 'https://textbook.latenights.me',
+    baseUrl: '/',
+    onBrokenLinks: 'throw',
+    onBrokenMarkdownLinks: 'warn',
+    favicon: 'favicon.ico',
+
+    i18n: {
+        defaultLocale: 'en',
+        locales: ['en'],
+    },
+
+    presets: [
+        [
+            'classic',
+            /** @type {import('@docusaurus/preset-classic').Options} */
+            ({
+                docs: {
+                    sidebarPath: require.resolve('./sidebars.js'),
+                    remarkPlugins: [math],
+                    rehypePlugins: [katex],
+                },
+                theme: {customCss: require.resolve('./src/css/custom.scss')},
+            }),
+        ],
+    ],
+
+    plugins: [
+        [
+            require.resolve("@easyops-cn/docusaurus-search-local"),
+            {
+                hashed: true,
+                indexBlog: false,
+                indexPages: true,
+            },
+        ],
+        'docusaurus-plugin-sass',
+    ],
+
+    stylesheets: [
+        {
+            href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+            type: 'text/css',
+            integrity:
+                'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+            crossorigin: 'anonymous',
+        },
+    ],
+
+    themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+        ({
+            docs: {
+                sidebar: {
+                    hideable: true,
+                }
+            },
+            navbar: {
+                title: 'LateNights',
+                logo: {
+                    alt: 'My Site Logo',
+                    src: 'logo.svg',
+                },
+                items: [
+                    {
+                        type: 'doc',
+                        docId: 'intro',
+                        position: 'left',
+                        label: 'Textbook',
+                    },
+                ],
+            },
+            tableOfContents: {
+                minHeadingLevel: 2,
+                maxHeadingLevel: 4,
+            },
+            footer: {
+                style: 'dark',
+                copyright: `Copyright © ${new Date().getFullYear()} LateNights, Built with Docusaurus.`,
+            },
+            prism: {
+                theme: lightCodeTheme,
+                darkTheme: darkCodeTheme,
+                showLineNumbers: true,
+            },
+        }),
+
+};
+
+module.exports = config;
