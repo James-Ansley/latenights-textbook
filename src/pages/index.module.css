@@ -17,3 +17,18 @@ h1 {
   font-size: 1.5em;
   color: var(--ifm-color-content-secondary);
 }
+
+@media screen and (max-width: 996px){
+  h1 {
+    font-size: 2em;
+    margin: 0;
+  }
+
+  .heroContainer {
+    margin: 2em 1.5em;
+  }
+
+  .tagline {
+    font-size: 1em;
+  }
+}
