@@ -2,7 +2,7 @@
 title: Intro
 ---
 
-# Introduction to ADTs
+# Abstract Data Types
 
 As strange as it may initially sound, as programmers manipulating data, we often
 want to know as little as possible about _how_ certain operations are performed

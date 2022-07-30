@@ -62,8 +62,6 @@ print(f"My name is {name}, and I am {age} years old.")
 # My name is James, and I am 24 years old.
 ```
 
-[//]: # (Which prints: `My name is James, and I am 24 years old.`)
-
 We aren't limited to just using variable names in the replacement fields in
 f-strings.
 With a few restrictions[^3], we can use any _expression_ instead.
@@ -85,6 +83,44 @@ Where the `:format-specifier` is optional.
 
 ### Format String Syntax
 
+With f-strings, expressions are put directly into the replacement fields.
+However, with format strings using the `str.format()` method, we pass the values
+in as positional or keyword arguments and in the replacement fields we can
+optionally reference them by _field names_ which are argument positions or
+keyword names.
+For example:
+
+```python
+name = "Bob"
+age = 7
+message = "The cat's name is {1}, they are {0} years old!"
+print(message.format(age, name))
+# The cat's name is Bob, they are 7 years old!
+```
+
+Here, we reference the values passed into format by their argument index.
+The field names for the two replacement fields are `1` and `0` respectively.
+
+We can also reference values by their keyword if we pass them into `format` as
+keyword arguments:
+
+```python
+message = """The cat's name is {cat}, they are {years} years old!
+{cat} is a good cat!"""
+print(message.format(cat=name, years=age))
+# The cat's name is Bob, they are 7 years old!
+# Bob is a good cat!
+```
+
+Here, the field names are the keywords `cat` and `years`.
+
+Both positional and keyword field names can be reused several times in the
+format string.
+If no field names are given in the replacement fields, the replacement fields
+will each be filled with an argument in order.
+In other words, `"{} {}".format(a, b)` is equivalent to
+`"{0} {1}".format(a, b)`.
+
 ## Format Specifiers
 
 ### Formatting Numbers
@@ -95,7 +131,14 @@ Where the `:format-specifier` is optional.
 
 ### How do I put a curly brace inside a format string?
 
-...
+To put curly braces `{` or `}` into a format string or f-string, you simply need
+to double them up in the string:
+
+```python
+pi = 3.141
+print(f"{{math.pi}} == {pi:.2f}")
+# {math.pi} == 3.14
+```
 
 [^1]: Confusingly, the strings used in the `str.format()` method are called
 "format strings" which are different to "f-strings" even though the terms are
