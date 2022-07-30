@@ -1,7 +1,3 @@
----
-outline: 'deep'
----
-
 # String Formatting
 
 When converting values to strings, to either print them to stdout or write them
@@ -87,7 +83,6 @@ The general form of the replacement field syntax in f-strings is:
 
 Where the `:format-specifier` is optional.
 
-
 ### Format String Syntax
 
 ## Format Specifiers
@@ -139,7 +134,6 @@ common.
 
     More restrictions are listed in the
     [Python docs][formatted-string-literals].
-
 
 [f-strings]: https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings
 

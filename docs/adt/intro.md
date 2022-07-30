@@ -1,3 +1,7 @@
+---
+title: Intro
+---
+
 # Introduction to ADTs
 
 As strange as it may initially sound, as programmers manipulating data, we often

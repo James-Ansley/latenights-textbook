@@ -1,0 +1,64 @@
+.feedback {
+    color: var(--text-color);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 0;
+    background-color: var(--ifm-background-surface-color-alt);
+    border: none !important;
+    margin-top: 1rem;
+}
+
+summary::before {
+    border-color: transparent transparent transparent currentColor !important;
+}
+
+details > div > div {
+    border-top: 1px solid currentColor !important;
+}
+
+details {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px 0;
+    border-radius: 0.5rem;
+    padding: 0 1rem;
+}
+
+.label-block {
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin: 0 auto 1.25rem;
+}
+
+.radio-block {
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+    width: 60%;
+}
+
+.prompt {
+    display: block;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+}
+
+.radio-label {
+    width: 20%;
+}
+
+.text-input {
+    background-color: var(--ifm-background-color);
+    color: currentColor;
+    width: 100%;
+    resize: vertical;
+    min-height: 3rem;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.submit-button {
+    display: block;
+    padding: 0.25rem 1rem;
+    margin-left: auto;
+    margin-right: 0;
+}
