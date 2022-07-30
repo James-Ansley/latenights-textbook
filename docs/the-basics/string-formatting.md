@@ -113,9 +113,9 @@ print(message.format(cat=name, years=age))
 ```
 
 Here, the field names are the keywords `cat` and `years`.
-
 Both positional and keyword field names can be reused several times in the
 format string.
+
 If no field names are given in the replacement fields, the replacement fields
 will each be filled with an argument in order.
 In other words, `"{} {}".format(a, b)` is equivalent to
