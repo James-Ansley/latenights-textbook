@@ -54,13 +54,13 @@ export const Feedback = (props) => {
                     <label className="radio-label" htmlFor="difficulty5">Too Complex</label>
                 </div>
 
-                <label className="prompt" htmlFor={name}>
+                <label className="prompt" htmlFor="suggestions">
                     Do you have any specific recommendations for improving this chapter?
                 </label>
                 <textarea
                     className="text-input"
-                    id={name}
-                    name={name}
+                    id="suggestions"
+                    name="suggestions"
                 ></textarea>
                 <button className="submit-button button button--outline button--primary" type='submit'>
                     Submit
