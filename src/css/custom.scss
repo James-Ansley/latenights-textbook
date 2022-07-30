@@ -134,16 +134,35 @@ pre > code {
 .theme-doc-sidebar-container {
   background-color: var(--ifm-background-surface-color);
 
-  .theme-doc-sidebar-menu * {
+  * {
     font-size: 0.9rem;
   }
 
-  .theme-doc-sidebar-item-category * {
-    font-weight: 600;
+  .theme-doc-sidebar-item-category {
+    padding-top: 0.3em;
+    margin-bottom: 0.3em;
+
+    * {
+      font-weight: 600;
+    }
   }
 
   .theme-doc-sidebar-item-category-level-1 {
     border-top: var(--divider-color) solid 1px;
+  }
+
+  .theme-doc-sidebar-item-link-level-1 {
+    padding-top: 0.3em;
+    margin-bottom: 0.3em;
+    border-top: var(--divider-color) solid 1px;
+  }
+
+  .theme-doc-sidebar-item-link-level-1:first-child {
+    border-top: none;
+  }
+
+  .theme-doc-sidebar-item-category-level-1:first-child {
+    border-top: none;
   }
 
   .theme-doc-sidebar-item-link * {
