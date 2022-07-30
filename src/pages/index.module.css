@@ -1,0 +1,19 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+h1 {
+  font-size: 3.5em;
+  color: var(--ifm-color-primary);
+  margin: 0;
+}
+
+.heroContainer {
+  margin: 5em 7.5em;
+}
+
+.tagline {
+  font-size: 1.5em;
+  color: var(--ifm-color-content-secondary);
+}
