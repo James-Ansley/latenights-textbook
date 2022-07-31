@@ -128,21 +128,72 @@ fields.
 Format specifiers allow us to do things like round numbers, specify the width
 and alignment of values, and add signs and separators to numbers.
 
-The general form of format specifier configuration that will be discussed here
-is:
-
-```text
-:[[fill]align][sign][width][grouping_option][.precision][type]
-```
-
-Where square brackets indicate optional fields.
-These options make up what is called the _format specification mini-language_.
+Format specifiers are defined by the _format specification mini-language_.
 A more complete list of formatting options can be found in
 the [Python docs][format-string-mini-language].
 
 ### Aligning Values
 
+Values can be aligned by specifying a width and an optional alignment: left
+(default), right, or center.
+By specifying a width, Python will pad out the value with an alignment
+character (by default a space `" "`) until it meets the width specified.
+
+For example, a value could be specified to be at least 20 characters
+wide:
+
+```python
+word = "Python"
+print(f"~{word:20}~")  # ~Python              ~
+```
+
+A value can also be aligned within a given width by including an alignment
+character:
+
+- `<` to left align (default)
+- `>` to right align
+- `^` to center align
+
+For example:
+
+```python
+print(f"'{'left':<20}'")    # 'left                '
+print(f"'{'right':>20}'")   # '               right'
+print(f"'{'center':^20}'")  # '       center       '
+```
+
+By default, Python will pad strings with spaces to make them fill the specified
+width.
+However, this can be changed by including a fill character before the alignment.
+In the following examples, an astrix (`*`) is used:
+
+```python
+print(f"'{'left':*<20}'")    # 'left****************'
+print(f"'{'right':*>20}'")   # '***************right'
+print(f"'{'center':*^20}'")  # '*******center*******'
+```
+
+If a value is wider than any specified width, the value will simply overflow and
+no fill characters will be used:
+
+```python
+value = "A really really really long string"
+print(f"'{value:>20}'")  # 'A really really really long string'
+```
+
+The general form for specifying alignment is:
+
+```text
+[[fill]alignment][width]
+```
+
+Where the square brackets indicate optional elements.
+
 ### Formatting Numbers
+
+#### Rounding
+
+#### Alternate Notation
 
 ## String Formatting FAQs
 
