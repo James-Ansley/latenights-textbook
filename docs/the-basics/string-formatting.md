@@ -123,9 +123,26 @@ Where the `field-name` and `:format-specifier` are both optional.
 
 ## Format Specifiers
 
-### Formatting Numbers
+Format specifiers are used to indicate how values are presented in replacement
+fields.
+Format specifiers allow us to do things like round numbers, specify the width
+and alignment of values, and add signs and separators to numbers.
+
+The general form of format specifier configuration that will be discussed here
+is:
+
+```text
+:[[fill]align][sign][width][grouping_option][.precision][type]
+```
+
+Where square brackets indicate optional fields.
+These options make up what is called the _format specification mini-language_.
+A more complete list of formatting options can be found in
+the [Python docs][format-string-mini-language].
 
 ### Aligning Values
+
+### Formatting Numbers
 
 ## String Formatting FAQs
 
@@ -183,3 +200,5 @@ common.
 [str.format]: https://docs.python.org/3/library/stdtypes.html#str.format
 
 [formatted-string-literals]: https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals
+
+[format-string-mini-language]: https://docs.python.org/3/library/string.html#format-specification-mini-language

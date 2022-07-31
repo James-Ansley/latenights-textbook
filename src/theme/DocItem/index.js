@@ -15,9 +15,7 @@ export default function DocItem(props) {
         <DocItemLayout>
           <MDXComponent />
           {/* Feedback Form */}
-          <div style={{width: "100%", margin: "3em 0 0 0"}}>
-            <Feedback page={props.location.pathname}/>
-          </div>
+          <div><Feedback page={props.location.pathname}/></div>
         </DocItemLayout>
       </HtmlClassNameProvider>
     </DocProvider>
