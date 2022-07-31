@@ -32,20 +32,13 @@ are indicated with curly braces `{}`.
 When the string is formatted, the replacement fields are "filled-in" with the
 values that are passed to the string.
 
-<!--
-The main difference between f-strings and format strings is that in f-strings
-values are put in the replacement fields directly, and in format strings the
-replacement fields are left blank and the values are passed as arguments
-to `str.format()`.
--->
-
 We configure the replacement fields to change how values appear in strings by
 including an optional _format specifier_.
 We indicate the start of the format specifier with a colon `:` and then include
 any formatting configuration.
-For example, in the above example printing $\pi$ to two decimal places the
-format specifier is `.2f` which specifies we want whatever number that fills in
-that replacement field to have two decimal places.
+In the above example printing $\pi$ to two decimal places, the format specifier
+is `.2f` which specifies we want whatever number that fills in that replacement
+field to have two decimal places.
 The syntax for format specifiers in f-strings and format strings is the same and
 is described in the [Format Specifiers section below](#format-string-syntax).
 
@@ -93,8 +86,7 @@ For example:
 ```python
 name = "Bob"
 age = 7
-message = "The cat's name is {1}, they are {0} years old!"
-print(message.format(age, name))
+print("The cat's name is {1}, they are {0} years old!".format(age, name))
 # The cat's name is Bob, they are 7 years old!
 ```
 
@@ -120,6 +112,14 @@ If no field names are given in the replacement fields, the replacement fields
 will each be filled with an argument in order.
 In other words, `"{} {}".format(a, b)` is equivalent to
 `"{0} {1}".format(a, b)`.
+
+The general form of the replacement field syntax in format strings is:
+
+```text
+{field-name:format-specifier}
+```
+
+Where the `field-name` and `:format-specifier` are both optional.
 
 ## Format Specifiers
 

@@ -8,9 +8,9 @@ export default function Home() {
     return (
         <Layout title="LateNights">
             <main>
-                <div class={styles.heroContainer}>
+                <div className={styles.heroContainer}>
                     <h1>LateNights Textbook</h1>
-                    <p class={styles.tagline}>An Introduction to Practical Data Structures and Algorithms</p>
+                    <p className={styles.tagline}>A Practical Introduction to Programming</p>
                     <Link class={"button button--primary"} href={"docs/intro"}>Get Started</Link>
                 </div>
             </main>

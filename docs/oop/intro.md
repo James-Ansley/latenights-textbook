@@ -4,6 +4,6 @@ sidebar_position: 100
 draft: true
 ---
 
-# Data Structures and Algorithms
+# Object Oriented Programming
 
 ...
