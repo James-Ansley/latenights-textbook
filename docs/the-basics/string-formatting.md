@@ -188,6 +188,8 @@ The general form for specifying alignment is:
 ```
 
 Where the square brackets indicate optional elements.
+Note that you can only specify a fill character if you also provide an
+alignment[^4].
 
 ### Formatting Numbers
 
@@ -245,6 +247,23 @@ common.
 
     More restrictions are listed in the
     [Python docs][formatted-string-literals].
+
+[^4]: 
+    
+    There is one exception to this. You can optionally prepend a `0` to the
+    width value, which will pad the string with 0s.
+    This can be useful for formatting numbers to always be the same number of
+    digits:
+
+    ```python
+    x = 123.45
+    y = 3.14
+    print(f"{x:06.2f}")  # 123.45
+    print(f"{y:06.2f}")  # 003.14
+    ```
+    
+    Here the `06` indicates we want the string to be at least 6 characters wide
+    (including the decimal point), with 0s as the padding character.
 
 [f-strings]: https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings
 
