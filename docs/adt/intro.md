@@ -1,6 +1,7 @@
 ---
-sidebar_label: Intro
 sidebar_position: 100
+sidebar_label: Intro
+pagination_label: Abstract Data Types
 draft: true
 ---
 

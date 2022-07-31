@@ -66,7 +66,7 @@ const config = {
                     hideable: true,
                 }
             },
-            metadata: [{name: 'keywords', content: 'python, data structures, algorithms'}],
+            metadata: [{name: 'keywords', content: 'python, data structures, algorithms, late nights, latenights, textbook'}],
             navbar: {
                 title: 'LateNights',
                 logo: {
