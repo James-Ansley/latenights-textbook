@@ -69,10 +69,10 @@ print(f"x is {x}. 2x is {2 * x}.")  # x is 4. 2x is 8.
 The general form of the replacement field syntax in f-strings is:
 
 ```text
-{expression:format-specifier}
+{expression[:format-specifier]}
 ```
 
-Where the `:format-specifier` is optional.
+Where square brackets indicate optional fields.
 
 ### Format String Syntax
 
@@ -116,10 +116,10 @@ In other words, `"{} {}".format(a, b)` is equivalent to
 The general form of the replacement field syntax in format strings is:
 
 ```text
-{field-name:format-specifier}
+{[field-name][:format-specifier]}
 ```
 
-Where the `field-name` and `:format-specifier` are both optional.
+Where square brackets indicate optional fields.
 
 ## Format Specifiers
 
@@ -132,12 +132,21 @@ Format specifiers are defined by the _format specification mini-language_.
 A more complete list of formatting options can be found in
 the [Python docs][format-string-mini-language].
 
+The general form of format specifiers that are discussed here is:
+
+```text
+[[fill]align][sign][0][width][grouping_option][.precision][type]
+```
+
+Where square brackets indicate optional fields.
+Note that the order these appear must be kept.
+
 ### Aligning Values
 
 Values can be aligned by specifying a width and an optional alignment: left
 (default), right, or center.
-By specifying a width, Python will pad out the value with an alignment
-character (by default a space `" "`) until it meets the width specified.
+By specifying a width, Python will pad out the value with a fill character (by
+default a space `" "`) until it meets the width specified.
 
 For example, a value could be specified to be at least 20 characters
 wide:
@@ -184,18 +193,106 @@ print(f"'{value:>20}'")  # 'A really really really long string'
 The general form for specifying alignment is:
 
 ```text
-[[fill]alignment][width]
+[[fill]align][width]
 ```
 
-Where the square brackets indicate optional elements.
 Note that you can only specify a fill character if you also provide an
 alignment[^4].
 
 ### Formatting Numbers
 
+String formatting also allows us to control the _precision_ and notation of
+numbers.
+
 #### Rounding
 
+To round numbers two things need to be included in the format specifier:
+
+- A _presentation type_ to specify that the replacement field is for float types
+- A _precision_ that indicates how many decimal places should be displayed[^5]
+
+Consider the following example from before:
+
+```python
+pi = 3.141
+print(f"Pi to two decimal places is: {pi:.2f}")
+```
+
+Here, the format specifier is `.2f`.
+The `f` is a presentation type used for floating point numbers[^6].
+And the `.2` specifies a precision of two decimal places.
+
+By specifying a precision, numbers are padded with extra 0s if they do not have
+enough decimal places or are integers:
+
+```python
+x = 5
+print(f"{x:.5f}")  # 5.00000
+```
+
 #### Alternate Notation
+
+String formatting can also be used to display numbers in scientific notation,
+include explicit signs, or use thousands separators among other things.
+
+##### Scientific Notation
+
+To display numbers in scientific notation, the "e" presentation type can
+be used[^7]:
+
+```python
+speed_of_light_m_s = 299792458
+print(f"{speed_of_light_m_s:e}")  # 2.997925e+08
+```
+
+The precision can also be specified to indicate how many digits appear after
+the decimal point:
+
+```python
+speed_of_light_m_s = 299792458
+print(f"{speed_of_light_m_s:.2e}")  # 3.00e+08
+```
+
+##### Number Signs
+
+By default, numbers will only display their sign (`+/-`) if they are negative.
+This can be changed by including a sign in the format specifier:
+
+```python
+x = -123
+y = 321
+print(f"{x:+}")  # -123
+print(f"{y:+}")  # +321
+```
+
+The sign characters that can be used are:
+
+- `+` to indicate the sign should be included on both positive and negative
+  numbers
+- `-` (default) to indicate the sign should only be included for negative
+  numbers
+- "&nbsp;" (the space character) to indicate a leading space should be used on
+  positive numbers and a minus should be used on negative numbers.
+  This is useful for aligning numbers.
+  ```python
+  x = -123
+  y = 321
+  print(f"'{x: }'")  # '-123'
+  print(f"'{y: }'")  # ' 321'
+  ```
+
+##### Thousands Separator
+
+Numbers can be displayed with thousands separators by including a _grouping
+character_:
+
+```python
+x = 1234567890
+print(f"{x:,}")  # 1,234,567,890
+```
+
+Here the comma (`,`) indicates commas should be used to group every 
+thousands block in the number.
 
 ## String Formatting FAQs
 
@@ -206,8 +303,7 @@ to double them up in the string:
 
 ```python
 pi = 3.141
-print(f"{{math.pi}} == {pi:.2f}")
-# {math.pi} == 3.14
+print(f"{{math.pi}} == {pi:.2f}")  # {math.pi} == 3.14
 ```
 
 [^1]: Confusingly, the strings used in the `str.format()` method are called
@@ -248,8 +344,8 @@ common.
     More restrictions are listed in the
     [Python docs][formatted-string-literals].
 
-[^4]: 
-    
+[^4]:
+
     There is one exception to this. You can optionally prepend a `0` to the
     width value, which will pad the string with 0s.
     This can be useful for formatting numbers to always be the same number of
@@ -264,6 +360,19 @@ common.
     
     Here the `06` indicates we want the string to be at least 6 characters wide
     (including the decimal point), with 0s as the padding character.
+
+[^5]: This is generally only true for the fixed-point presentation type "f".
+See the [Python docs][format-string-mini-language] for more on how precision is
+used for other presentation types
+
+[^6]: There are several presentation types for floats.
+"f" or the _fixed point_ precision type is the most common for floats and
+simplest to use.
+See the [Python docs][format-string-mini-language] for the full list and
+descriptions of presentation types.
+
+[^7]: An uppercase "E" can also be used.
+This just displays the separator character as "E" instead of "e".
 
 [f-strings]: https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings
 

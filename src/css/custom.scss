@@ -20,6 +20,7 @@ html[data-theme='dark'] {
 
 :root {
   --text-color: #213547;
+  --text-color-alt: #273f54;
   --divider-color: rgba(60, 60, 60, 0.12);
   --ifm-background-color: #ffffff;
   --ifm-background-color-trans: rgba(255, 255, 255, 0.95);
@@ -36,6 +37,7 @@ html[data-theme='dark'] {
 
 html[data-theme="dark"] {
   --text-color: rgba(255, 255, 255, 0.85);
+  --text-color-alt: rgba(217, 217, 217, 0.85);
   --divider-color: rgba(84, 84, 84, 0.48);
   --ifm-background-color: #242424;
   --ifm-background-color-trans: rgba(36, 36, 36, 0.95);
@@ -85,9 +87,15 @@ body {
     margin: 1.5em 0 0;
   }
 
-  h4, h5, h6 {
+  h4 {
+    font-size: 1.1em;
+    margin: 0;
+  }
+
+  h5, h6 {
     font-size: 1em;
     margin: 0;
+    color: var(--text-color-alt);
   }
 }
 
