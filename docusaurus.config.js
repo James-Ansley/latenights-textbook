@@ -53,6 +53,12 @@ const config = {
         },
     ],
 
+    scripts: [
+        {
+            src: "https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js",
+        },
+    ],
+
     themeConfig:
         ({
             docs: {
@@ -60,7 +66,10 @@ const config = {
                     hideable: true,
                 }
             },
-            metadata: [{name: 'keywords', content: 'python, data structures, algorithms, late nights, latenights, textbook'}],
+            metadata: [{
+                name: 'keywords',
+                content: 'python, data structures, algorithms, late nights, latenights, textbook'
+            }],
             navbar: {
                 title: 'LateNights',
                 logo: {

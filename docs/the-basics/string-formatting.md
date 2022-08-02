@@ -249,7 +249,6 @@ The precision can also be specified to indicate how many digits appear after
 the decimal point:
 
 ```python
-speed_of_light_m_s = 299792458
 print(f"{speed_of_light_m_s:.2e}")  # 3.00e+08
 ```
 
@@ -275,8 +274,6 @@ The sign characters that can be used are:
   positive numbers and a minus should be used on negative numbers.
   This is useful for aligning numbers.
   ```python
-  x = -123
-  y = 321
   print(f"'{x: }'")  # '-123'
   print(f"'{y: }'")  # ' 321'
   ```
