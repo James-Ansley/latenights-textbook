@@ -1,0 +1,10 @@
+.ace_hidden-cursors {
+    opacity: 0;
+}
+
+.code-editor {
+    margin: 0 0 var(--ifm-leading);
+    overflow: clip;
+    border-radius: 0.25em;
+    background-color: #F6F8FA;
+}

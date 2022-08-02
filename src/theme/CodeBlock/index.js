@@ -2,16 +2,7 @@ import React, {isValidElement} from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import ElementContent from '@theme/CodeBlock/Content/Element';
 import StringContent from '@theme/CodeBlock/Content/String';
-
-import AceEditor from "react-ace";
-
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/theme-github";
-import "ace-builds/src-noconflict/ext-language_tools";
-import "./editor.css"
-
-import {useState} from "react";
-import {usePython} from "react-py";
+import CodeEditor from "@site/src/components/CodeEditor";
 
 function maybeStringifyChildren(children) {
     if (React.Children.toArray(children).some((el) => isValidElement(el))) {
@@ -22,50 +13,8 @@ function maybeStringifyChildren(children) {
 
 export default function CodeBlock({children: rawChildren, ...props}) {
     const children = maybeStringifyChildren(rawChildren);
-    const [input, setInput] = useState(children.trimEnd());
-    const {runPython, stdout, stderr, isLoading} = usePython();
     if (props.className === "language-python") {
-        return (
-            <div style={{
-                margin: "0.5em 0",
-                overflow: "clip",
-                borderRadius: '0.25em',
-                backgroundColor: "#F6F8FA",
-            }}>
-                <AceEditor
-                    value={input}
-                    mode="python"
-                    theme={"github"}
-                    onChange={(newValue, e) => {
-                        setInput(newValue)
-                    }}
-                    onLoad={editor => {
-                        editor.renderer.setScrollMargin(5, 5, 0, 0);
-                        editor.renderer.setPadding(10);
-                        editor.moveCursorTo(0, 0);
-                    }}
-                    name="CodeBlock"
-                    fontSize={'0.95em'}
-                    editorProps={{$blockScrolling: true}}
-                    width='100%'
-                    maxLines={Infinity}
-                    style={{
-                        backgroundColor: "rgba(0, 0, 0, 0)",
-                    }}
-                    setOptions={{
-                        enableBasicAutocompletion: true,
-                        enableLiveAutocompletion: true,
-                        enableSnippets: true,
-                        highlightActiveLine: false,
-                        cursorStyle: "ace",
-                        showPrintMargin: false,
-                        scrollPastEnd: false,
-                        showLineNumbers: false,
-                        showGutter: false,
-                    }}
-                />
-            </div>
-        )
+        return <CodeEditor code={children}/>
     } else {
         const isBrowser = useIsBrowser();
         const CodeBlockComp =
