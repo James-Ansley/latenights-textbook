@@ -25,7 +25,12 @@ export default function CodeBlock({children: rawChildren, ...props}) {
     const {runPython, stdout, stderr, isLoading} = usePython();
     if (props.className === "language-python") {
         return (
-            <div>
+            <div style={{
+                margin: "0.5em 0",
+                overflow: "clip",
+                borderRadius: '0.25em',
+                backgroundColor: "#F6F8FA",
+            }}>
                 <AceEditor
                     value={input}
                     mode="python"
@@ -34,8 +39,8 @@ export default function CodeBlock({children: rawChildren, ...props}) {
                         setInput(newValue)
                     }}
                     onLoad={editor => {
-                        editor.renderer.setScrollMargin(18, 18, 0, 0);
-                        editor.renderer.setPadding(18);
+                        editor.renderer.setScrollMargin(5, 5, 0, 0);
+                        editor.renderer.setPadding(10);
                         editor.moveCursorTo(0, 0);
                     }}
                     name="CodeBlock"
@@ -44,9 +49,7 @@ export default function CodeBlock({children: rawChildren, ...props}) {
                     width='100%'
                     maxLines={Infinity}
                     style={{
-                        borderRadius: '0.25em',
-                        backgroundColor: "#F6F8FA",
-                        padding: "1em",
+                        backgroundColor: "rgba(0, 0, 0, 0)",
                     }}
                     setOptions={{
                         enableBasicAutocompletion: true,
