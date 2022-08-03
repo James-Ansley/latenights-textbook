@@ -27,21 +27,21 @@ export default function CodeEditor(props) {
                     <AceEditor
                         value={input}
                         mode="python"
+                        name="CodeBlock"
+                        fontSize={'0.9em'}
                         theme={colorMode === 'dark' ? "idle_fingers" : "textmate"}
                         onChange={(newValue, e) => {
                             setInput(newValue)
                         }}
+                        width='100%'
+                        maxLines={Infinity}
+                        style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
                         onLoad={editor => {
                             editor.renderer.setScrollMargin(10, 10, 0, 0);
                             editor.renderer.setPadding(16);
                             editor.moveCursorTo(0, 0);
                         }}
-                        name="CodeBlock"
-                        fontSize={'0.9em'}
                         editorProps={{$blockScrolling: true}}
-                        width='100%'
-                        maxLines={Infinity}
-                        style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
                         setOptions={{
                             enableBasicAutocompletion: true,
                             enableLiveAutocompletion: true,
