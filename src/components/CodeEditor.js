@@ -10,7 +10,7 @@ export default function CodeEditor(props) {
 
     const {colorMode} = useColorMode();
     const isBrowser = useIsBrowser();
-    
+
     let AceEditor = null;
     if (isBrowser) {
         AceEditor = require('react-ace').default;
