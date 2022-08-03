@@ -41,7 +41,7 @@ export default function CodeEditor(props) {
                     value={input}
                     mode="python"
                     name="CodeBlock"
-                    fontSize={'0.9em'}
+                    fontSize={'0.9rem'}
                     theme={colorMode === 'dark' ? "idle_fingers" : "textmate"}
                     onChange={(newValue, e) => setInput(newValue)}
                     width='100%'

@@ -14,8 +14,3 @@ We are constantly looking to improve the site.
 If you want, let us know what you think of different chapters in the feedback
 forms at the bottom of each page (or if you spot any typos 
 :slightly_smiling_face:).
-
-
-```python
-print("hello, world")
-```
