@@ -77,7 +77,7 @@ Here, the `condition` is just some expression that can be evaluated to
 :::info But what about Tuple Comprehension?
 You may have noticed no examples have been given for "tuple comprehension".
 If you use round brackets `()` for a comprehension, you would create what
-is called a _generator expression_.
+is called a _generator expression_ and not a tuple.
 
 These are described in the
 [Generator Expressions section](#generator-expressions) below.
@@ -163,7 +163,7 @@ print(new_values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 In general, each component of comprehensions can appear on its own line.
-But, be make sure each line is indented and aligned to improve readability.
+But, make sure each line is indented and aligned to improve readability.
 
 ## Generator Expressions
 
