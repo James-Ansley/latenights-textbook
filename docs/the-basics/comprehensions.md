@@ -1,6 +1,5 @@
 ---
 sidebar_position: 500
-draft: true
 ---
 
 # Comprehension
@@ -167,4 +166,40 @@ But, make sure each line is indented and aligned to improve readability.
 
 ## Generator Expressions
 
-...
+After seeing the syntax for list and set comprehensions, it is reasonable to
+assume that tuples could be generated using the following syntax:
+
+```python
+(expression for expression in iterable if condition)
+```
+
+However, this syntax is instead for _generator expressions_ and creates
+_iterators_ that allow us to loop over their values at most once.
+
+For example taking the [mapping example from before](#mapping-values-in-a-list),
+if we were to use a generator expression instead, we might get some strange
+results:
+
+```python
+values = [0.3, -1.5 , 12.4, 1.0, -0.2, -0.3, 1.4]
+
+values = (max(0.0, x) for x in values)  # round brackets
+print(values)  # <generator object <genexpr> at ...>
+```
+
+Here we can see `values` is a `generator object` and not a tuple.
+Generators in Python are Iterators – not Sequences or Iterables.
+Because of this we can't index their values and can only loop over them at 
+most once:
+
+```python
+values = [0.3, -1.5 , 12.4, 1.0, -0.2, -0.3, 1.4]
+
+values = (max(0.0, x) for x in values)
+
+for value in values:
+    print(value, end=" ")  # 0.3 0.0 12.4 1.0 0.0 0.0 1.4 
+
+for value in values:  # Second loop does not run as values has been consumed
+    print(value, end=" ")  # No output
+```
