@@ -15,6 +15,7 @@ Using a simple for loop this would look like:
 
 ```python
 values = {1, 2, 3, 4, 5, 6}
+
 new_values = set()
 for value in values:
     if value % 3 != 0:
@@ -46,7 +47,7 @@ problems comprehensions are good at solving.
 Comprehension involves specifying some expression that is used to map the
 values of an iterable and an optional condition that is used to filter values.
 
-In the above example _set comprehension_ was used to generate a new set; 
+In the above example _set comprehension_ was used to generate a new set;
 however, comprehension can also be used to create lists and dictionaries.
 The general form of comprehensions in Python for each of these collections is:
 
@@ -70,12 +71,12 @@ The general form of comprehensions in Python for each of these collections is:
   ```
 
 Note that in all of these cases, the `if condition` is optional.
-Here, the `condition` is just some expression that can be evaluated to 
+Here, the `condition` is just some expression that can be evaluated to
 `True` or `False`.
 
 :::info But what about Tuple Comprehension?
 You may have noticed no examples have been given for "tuple comprehension".
-If you used round brackets `()` for a comprehension, you would create what 
+If you use round brackets `()` for a comprehension, you would create what
 is called a _generator expression_.
 
 These are described in the
@@ -86,7 +87,7 @@ These are described in the
 
 #### Mapping Values in a List
 
-Let's say we are given a list of floats, and we want to map all the negative 
+Let's say we are given a list of floats, and we want to map all the negative
 values to `0.0`.
 We can solve this problem using list comprehension:
 
@@ -98,7 +99,8 @@ print(values)  # [0.3, 0.0, 12.4, 1.0, 0.0, 0.0, 1.4]
 ```
 
 #### Filtering Values in a Dictionary
-Let's say we are given a dictionary mapping strings to lists of integers, 
+
+Let's say we are given a dictionary mapping strings to lists of integers,
 and we want to remove all the key-value pairs whose values are empty lists.
 We can solve this problem using dictionary comprehension:
 
@@ -109,9 +111,60 @@ values = {k: v for k, v in values.items() if len(v) != 0}
 print(values)  # {'str1': [1, 2, 3], 'str3': [1]}
 ```
 
+Note that we aren't changing the key or the value.
+
 ## Nested Comprehension
 
-...
+:::caution Beware
+It is very easy to write confusing and ugly code with nested comprehensions.
+:::
+
+In the same way for-loops can be nested, the "for-loop component" of
+comprehensions can be nested as well.
+
+For example, let's say we wanted to _flatten_ a nested list of lists.
+This could be done using a nested for-loop:
+
+```python
+values = [[1, 2, 3], [4, 5], [6], [7, 8, 9]]
+
+new_values = []
+for sublist in values:
+    for value in sublist:
+        new_values.append(value)
+
+print(new_values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+To rewrite this with list comprehension we can nest the loops:
+
+```python
+values = [[1, 2, 3], [4, 5], [6], [7, 8, 9]]
+
+values = [value for sublist in values for value in sublist]
+print(new_values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+While this is definitely shorter than the nested for-loops example, it can
+definitely be confusing to comprehend.
+
+It might be best to put the components of complex comprehensions like this
+on separate lines to make it easier to read and comprehend:
+
+```python
+values = [[1, 2, 3], [4, 5], [6], [7, 8, 9]]
+
+values = [
+    value
+    for sublist in values
+    for value in sublist
+]
+print(new_values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+In general, each component of comprehensions can appear on its own line.
+But, be sure to make sure each line is indented and aligned to improve
+readability.
 
 ## Generator Expressions
 
