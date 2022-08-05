@@ -34,8 +34,8 @@ To solve the above problem using _set comprehension_, we would do:
 
 ```python
 values = {1, 2, 3, 4, 5, 6}
-new_values = {value ** 2 for value in values if value % 3 != 0}
 
+new_values = {value ** 2 for value in values if value % 3 != 0}
 print(new_values)  # {1, 4, 16, 25}
 ```
 
@@ -142,7 +142,7 @@ To rewrite this with list comprehension we can nest the loops:
 values = [[1, 2, 3], [4, 5], [6], [7, 8, 9]]
 
 values = [value for sublist in values for value in sublist]
-print(new_values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 While this is definitely shorter than the nested for-loops example, it can
@@ -159,7 +159,7 @@ values = [
     for sublist in values
     for value in sublist
 ]
-print(new_values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 In general, each component of comprehensions can appear on its own line.
