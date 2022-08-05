@@ -85,11 +85,19 @@ body {
   h3 {
     font-size: 1.25em;
     margin: 1.5em 0 0;
+
+    + h4 {
+      margin-top: 0.5em;
+    }
   }
 
   h4 {
     font-size: 1.1em;
     margin: 0;
+
+    + p {
+      margin-top: 0.5em;
+    }
   }
 
   h5, h6 {
@@ -112,6 +120,8 @@ pre > code {
 
 // Footnotes
 .footnotes {
+  margin-top: 3em;
+
   p {
     font-size: .95em !important;
     margin: 0.5em 0;
@@ -179,4 +189,13 @@ pre > code {
   margin-top: 0 !important;
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+.theme-admonition {
+  font-size: 0.95rem;
+  padding: 1em;
+
+  p:first-child {
+    margin-top: 0;
+  }
 }

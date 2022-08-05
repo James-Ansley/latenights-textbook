@@ -5,49 +5,114 @@ draft: true
 
 # Comprehension
 
-Comprehension in Python provides a concise way to generate collections such
-as `sets`, `lists`, or `dicts` using similar notation to set builder notation.
+Two common patterns in programming are looping over the values of some
+collection and performing an out-of-place _mapping_ or _filtering_.
+For example, let's say we had a set of values, `values`, and we wanted to
+generate a new set containing the squares of each value that is not divisible
+by 3.
 
-For example, let's say we wanted to generate the squares of the natural
-numbers up to $n$ inclusive that are not divisible by 3.
-In set builder notation, this would be:
-
-$$
-\left\{
-x^2 \mid x \in \mathbb{N} \wedge x \le n
-\wedge x \bmod 3 \neq 0
-\right\}
-$$
-
-In Python using _set comprehension_, this would be:
+Using a simple for loop this would look like:
 
 ```python
-{x ** 2 for x in range(1, n + 1) if x % 3 != 0}
+values = {1, 2, 3, 4, 5, 6}
+new_values = set()
+for value in values:
+    if value % 3 != 0:
+        new_values.add(value ** 2)
+        
+print(new_values)  # {1, 4, 16, 25}
 ```
 
-While there are a few differences in the notation, the overall idea is the same.
-Take some expression and apply it over some range of values with one or more
-conditions.
+This is quite a lot of code to something very simple.
+Thankfully, Python has a concise notation for performing such out of place
+mapping and filtering operations called _comprehension_.
+Comprehension in Python provides a concise way to map and filter the values in
+collections to create new `sets`, `lists`, or `dicts`.
+
+To solve the above problem using _set comprehension_, we would do:
+
+```python
+values = {1, 2, 3, 4, 5, 6}
+new_values = {value ** 2 for value in values if value % 3 != 0}
+
+print(new_values)  # {1, 4, 16, 25}
+```
 
 This section will explain the syntax of comprehensions and the types of
 problems comprehensions are good at solving.
 
 ## Comprehension Syntax
 
-Comprehension involves specifying some expression that is used to map the 
+Comprehension involves specifying some expression that is used to map the
 values of an iterable and an optional condition that is used to filter values.
 
-The syntax for list, set, and dictionary comprehension are similar; however 
-they will all be described separately in the following sections.
+In the above example _set comprehension_ was used to generate a new set; 
+however, comprehension can also be used to create lists and dictionaries.
+The general form of comprehensions in Python for each of these collections is:
 
-### List Comprehension
+- **List Comprehension**:
+  ```python
+  [expression for variable in iterable]
+  # or
+  [expression for variable in iterable if condition]
+  ```
+- **Set Comprehension**:
+  ```python
+  {expression for variable in iterable}
+  # or
+  {expression for variable in iterable if condition}
+  ```
+- **Dictionary Comprehension**:
+  ```python
+  {expression1: expression2 for variable in iterable}
+  # or
+  {expression1: expression2 for variable in iterable if condition}
+  ```
 
-### Set Comprehension
+Note that in all of these cases, the `if condition` is optional.
+Here, the `condition` is just some expression that can be evaluated to 
+`True` or `False`.
 
-### Dict Comprehension
+:::info But what about Tuple Comprehension?
+You may have noticed no examples have been given for "tuple comprehension".
+If you used round brackets `()` for a comprehension, you would create what 
+is called a _generator expression_.
+
+These are described in the
+[Generator Expressions section](#generator-expressions) below.
+:::
+
+### Examples
+
+#### Mapping Values in a List
+
+Let's say we are given a list of floats, and we want to map all the negative 
+values to `0.0`.
+We can solve this problem using list comprehension:
+
+```python
+values = [0.3, -1.5 , 12.4, 1.0, -0.2, -0.3, 1.4]
+
+values = [max(0.0, x) for x in values]
+print(values)  # [0.3, 0.0, 12.4, 1.0, 0.0, 0.0, 1.4]
+```
+
+#### Filtering Values in a Dictionary
+Let's say we are given a dictionary mapping strings to lists of integers, 
+and we want to remove all the key-value pairs whose values are empty lists.
+We can solve this problem using dictionary comprehension:
+
+```python
+values = {"str1": [1, 2, 3], "str2": [], "str3": [1], "str4": []}
+
+values = {k: v for k, v in values.items() if len(v) != 0}
+print(values)  # {'str1': [1, 2, 3], 'str3': [1]}
+```
 
 ## Nested Comprehension
 
-## Comprehension FAQs
+...
 
-### What About Tuple Comprehension?
+## Generator Expressions
+
+...
