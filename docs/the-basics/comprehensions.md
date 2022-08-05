@@ -163,8 +163,7 @@ print(new_values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 In general, each component of comprehensions can appear on its own line.
-But, be sure to make sure each line is indented and aligned to improve
-readability.
+But, be make sure each line is indented and aligned to improve readability.
 
 ## Generator Expressions
 
