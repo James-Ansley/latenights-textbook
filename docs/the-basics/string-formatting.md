@@ -52,7 +52,7 @@ We can then put replacement fields inside the string:
 name = "Sue"
 age = 36
 print(f"My name is {name}, and I am {age} years old.")
-# My name is James, and I am 24 years old.
+# My name is Sue, and I am 36 years old.
 ```
 
 We aren't limited to just using variable names in the replacement fields in
@@ -97,8 +97,7 @@ We can also reference values by their keyword if we pass them into `format` as
 keyword arguments:
 
 ```python
-name = "Bob"
-age = 7
+name, age = "Bob", 7
 
 message = """The cat's name is {cat}, they are {years} years old!
 {cat} is a good cat!"""
@@ -278,6 +277,7 @@ The sign characters that can be used are:
   positive numbers and a minus should be used on negative numbers.
   This is useful for aligning numbers.
   ```python
+  x, y = -123, 321
   print(f"'{x: }'")  # '-123'
   print(f"'{y: }'")  # ' 321'
   ```
