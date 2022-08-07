@@ -11,7 +11,7 @@ export default function Home() {
                 <div className={styles.heroContainer}>
                     <h1>LateNights Textbook</h1>
                     <p className={styles.tagline}>A Practical Introduction to Programming</p>
-                    <Link class={"button button--primary"} href={"docs/intro"}>Get Started</Link>
+                    <Link className={"button button--primary"} href={"docs/intro"}>Get Started</Link>
                 </div>
             </main>
         </Layout>

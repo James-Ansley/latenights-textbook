@@ -17,7 +17,6 @@ export const Feedback = (props) => {
                 name={formName}
                 method='post'
                 data-netlify='true'
-                onSubmit='submit'
                 data-netlify-honeypot={'bot-field'}
             >
                 <div hidden><input name='bot-field'/></div>

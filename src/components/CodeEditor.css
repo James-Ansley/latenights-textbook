@@ -1,0 +1,44 @@
+.ace_hidden-cursors {
+    opacity: 0;
+}
+
+.code-editor {
+    margin: 0 0 var(--ifm-leading);
+}
+
+.code-editor-window {
+    overflow: clip;
+    border-radius: 0.25em;
+    background-color: var(--code-background);
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    top: 0.25em;
+    right: 0.25em;
+    gap: 5px;
+}
+
+.output-window {
+    border-top: currentColor solid 1px;
+    border-radius: 0 0 .25em .25em;
+}
+
+.icon-button {
+    background-color: transparent;
+    color: currentColor;
+    border: none;
+    line-height: 0;
+    padding: 0;
+    opacity: 40%;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    opacity: 100%;
+}
+
+.icon {
+    margin: auto;
+}
