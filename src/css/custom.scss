@@ -101,6 +101,10 @@ body {
     margin: 0;
     color: var(--text-color-alt);
   }
+
+  pre {
+    background-color: var(--code-background);
+  }
 }
 
 // Code Blocks
