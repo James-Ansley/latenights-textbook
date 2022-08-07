@@ -41,6 +41,16 @@ export default function CodeEditor(props) {
         require("ace-builds/src-noconflict/ext-language_tools");
     }
 
+    function reset() {
+        setShowOutput(false);
+        setInput(props.code.trimEnd())
+    }
+
+    function run() {
+        setShowOutput(true);
+        return runPython(input);
+    }
+
     return <BrowserOnly>
         {() => <div className={"code-editor"}>
             <div
@@ -65,10 +75,7 @@ export default function CodeEditor(props) {
                     <button
                         className={"icon-button"}
                         disabled={isLoading || isRunning}
-                        onClick={() => {
-                            setShowOutput(true);
-                            return runPython(input);
-                        }}
+                        onClick={run}
                         aria-label={"Run Code"}
                         title={"Run Code"}
                     >
@@ -76,7 +83,7 @@ export default function CodeEditor(props) {
                     </button>
                     <button
                         className={"icon-button"}
-                        onClick={() => setShowOutput(false)}
+                        onClick={reset}
                         aria-label={"Reset Code Window"}
                         title={"Reset Code Window"}
                     >
