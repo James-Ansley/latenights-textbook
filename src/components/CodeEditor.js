@@ -6,9 +6,6 @@ import {usePython} from "react-py";
 
 import "./CodeEditor.css"
 
-import {BsPlayFill} from "react-icons/bs";
-import {BiReset} from "react-icons/bi";
-
 const editorOptions = {
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true,
@@ -79,7 +76,7 @@ export default function CodeEditor(props) {
                         aria-label={"Run Code"}
                         title={"Run Code"}
                     >
-                        <BsPlayFill size={'1.7em'}/>
+                        <span className={"icon"}>{"\u25B6"}</span>
                     </button>
                     <button
                         className={"icon-button"}
@@ -87,7 +84,7 @@ export default function CodeEditor(props) {
                         aria-label={"Reset Code Window"}
                         title={"Reset Code Window"}
                     >
-                        <BiReset size={"1.7em"}/>
+                        <span className={"icon"}>{"\u21BA"}</span>
                     </button>
                 </div>
             </div>
