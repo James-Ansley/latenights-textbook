@@ -17,12 +17,21 @@
     position: absolute;
     top: 0.25em;
     right: 0.25em;
+    display: flex;
     gap: 5px;
+    opacity: 0;
+}
+
+.code-editor-window:hover .button-container,
+.code-editor-window:active .button-container {
+    opacity: 100%;
 }
 
 .output-window {
-    border-top: currentColor solid 1px;
+    border: var(--divider-color-alt) solid 1px;
+    border-top: var(--divider-color) solid 1px;
     border-radius: 0 0 .25em .25em;
+    padding: 0.5em 1em;
 }
 
 .icon-button {
@@ -37,8 +46,4 @@
 
 .icon-button:hover {
     opacity: 100%;
-}
-
-.icon {
-    margin: auto;
 }

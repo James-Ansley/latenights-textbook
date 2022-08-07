@@ -79,7 +79,7 @@ export default function CodeEditor(props) {
                         aria-label={"Run Code"}
                         title={"Run Code"}
                     >
-                        <BsPlayFill className={"icon"} size={'1.7em'}/>
+                        <BsPlayFill size={'1.7em'}/>
                     </button>
                     <button
                         className={"icon-button"}
@@ -87,14 +87,14 @@ export default function CodeEditor(props) {
                         aria-label={"Reset Code Window"}
                         title={"Reset Code Window"}
                     >
-                        <BiReset className={"icon"} size={"1.7em"}/>
+                        <BiReset size={"1.7em"}/>
                     </button>
                 </div>
             </div>
             {showOutput &&
                 <>
                     <pre className={"output-window"}>
-                        {stdout}{<span style={{color: "red"}}>{stderr}</span>}
+                        {stdout}{<span style={{color: "var(--text-code-error)"}}>{stderr}</span>}
                     </pre>
                 </>
             }

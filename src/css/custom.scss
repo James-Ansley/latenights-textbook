@@ -21,11 +21,14 @@ html[data-theme='dark'] {
 :root {
   --text-color: #213547;
   --text-color-alt: #273f54;
+  --text-code-error: hsla(0, 100%, 50%, 90%);
+
   --divider-color: rgba(60, 60, 60, 0.12);
+  --divider-color-alt: hsla(0, 0%, 40%, 0.08);
   --ifm-background-color: #ffffff;
   --ifm-background-color-trans: rgba(255, 255, 255, 0.95);
   --ifm-background-surface-color: #f9f9f9;
-  --ifm-background-surface-color-alt: #f9f9f9;
+  --ifm-background-surface-color-alt: hsl(0, 0%, 91%);
 
   --ifm-font-family: Helvetica, sans-serif;
   --ifm-heading-font-family: var(--ifm-font-family);
@@ -40,7 +43,9 @@ html[data-theme='dark'] {
 html[data-theme="dark"] {
   --text-color: rgba(255, 255, 255, 0.85);
   --text-color-alt: rgba(217, 217, 217, 0.85);
-  --divider-color: rgba(84, 84, 84, 0.48);
+  --divider-color: hsla(0, 0%, 33%, 0.48);
+  --divider-color-alt: hsla(0, 0%, 25%, 0.40);
+
   --ifm-background-color: #242424;
   --ifm-background-color-trans: rgba(36, 36, 36, 0.95);
   --ifm-background-surface-color: #1a1a1a;

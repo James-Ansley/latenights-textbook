@@ -49,8 +49,8 @@ We indicate a string is an f-string by prefixing an `f` to a string literal:
 We can then put replacement fields inside the string:
 
 ```python
-name = "James"
-age = 24
+name = "Sue"
+age = 36
 print(f"My name is {name}, and I am {age} years old.")
 # My name is James, and I am 24 years old.
 ```
@@ -97,6 +97,9 @@ We can also reference values by their keyword if we pass them into `format` as
 keyword arguments:
 
 ```python
+name = "Bob"
+age = 7
+
 message = """The cat's name is {cat}, they are {years} years old!
 {cat} is a good cat!"""
 print(message.format(cat=name, years=age))
@@ -249,6 +252,7 @@ The precision can also be specified to indicate how many digits appear after
 the decimal point:
 
 ```python
+speed_of_light_m_s = 299792458
 print(f"{speed_of_light_m_s:.2e}")  # 3.00e+08
 ```
 
