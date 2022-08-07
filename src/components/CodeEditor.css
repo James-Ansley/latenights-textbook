@@ -4,6 +4,9 @@
 
 .code-editor {
     margin: 0 0 var(--ifm-leading);
+}
+
+.code-editor-window {
     overflow: clip;
     border-radius: 0.25em;
     background-color: var(--code-background);

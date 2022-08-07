@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import {useColorMode} from '@docusaurus/theme-common';
+import {usePython} from "react-py";
 
 import "./CodeEditor.css"
 
@@ -21,6 +22,9 @@ const editorOnLoad = editor => {
 
 export default function CodeEditor(props) {
     const [input, setInput] = useState(props.code.trimEnd());
+    const [showOutput, setShowOutput] = useState(false);
+
+    const {runPython, stdout, stderr, isLoading, isRunning} = usePython();
 
     const {colorMode} = useColorMode();
     const isBrowser = useIsBrowser();
@@ -35,8 +39,8 @@ export default function CodeEditor(props) {
     }
 
     return <BrowserOnly>
-        {() =>
-            <div className={"code-editor"}>
+        {() => <div className={"code-editor"}>
+            <div className={"code-editor-window"}>
                 <AceEditor
                     value={input}
                     mode="python"
@@ -52,6 +56,21 @@ export default function CodeEditor(props) {
                     setOptions={editorOptions}
                 />
             </div>
-        }
+            <button
+                disabled={isLoading || isRunning}
+                onClick={() => {
+                    setShowOutput(true);
+                    return runPython(input);
+                }}>
+                Run
+            </button>
+            <button
+                onClick={() => setShowOutput(false)}>
+                Reset
+            </button>
+            {showOutput && <pre>
+                {stdout}{<span style={{color: "red"}}>{stderr}</span>}
+            </pre>}
+        </div>}
     </BrowserOnly>
 }

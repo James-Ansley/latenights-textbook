@@ -53,12 +53,6 @@ const config = {
         },
     ],
 
-    scripts: [
-        {
-            src: "https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js",
-        },
-    ],
-
     themeConfig:
         ({
             docs: {
