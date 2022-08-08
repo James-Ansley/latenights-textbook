@@ -19,7 +19,7 @@ new_values = set()
 for value in values:
     if value % 3 != 0:
         new_values.add(value ** 2)
-        
+
 print(new_values)  # {1, 4, 16, 25}
 ```
 
@@ -51,26 +51,26 @@ however, comprehension can also be used to create lists and dictionaries.
 The general form of comprehensions in Python for each of these collections is:
 
 - **List Comprehension**:
-  ```python
+  ```text
   [expression for variable in iterable]
   # or
   [expression for variable in iterable if condition]
   ```
 - **Set Comprehension**:
-  ```python
+  ```text
   {expression for variable in iterable}
   # or
   {expression for variable in iterable if condition}
   ```
 - **Dictionary Comprehension**:
-  ```python
+  ```text
   {expression1: expression2 for variable in iterable}
   # or
   {expression1: expression2 for variable in iterable if condition}
   ```
 
 Note that in all of these cases, the `if condition` is optional.
-Here, the `condition` is just some expression that can be evaluated to
+Here, the `condition` is just some expression that can be evaluated as
 `True` or `False`.
 
 :::info But what about Tuple Comprehension?
@@ -158,7 +158,7 @@ values = [
     for sublist in values
     for value in sublist
 ]
-print(values)  #  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(values)  # [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
 In general, each component of comprehensions can appear on its own line.

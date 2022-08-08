@@ -4,6 +4,8 @@
 
 .code-editor {
     margin: 0 0 var(--ifm-leading);
+    border-radius: 0.25em;
+    box-shadow: 0 0 10px rgba(0,0,0,0.07);
 }
 
 .code-editor-window {
