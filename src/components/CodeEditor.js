@@ -93,13 +93,12 @@ export default function CodeEditor(props) {
                     </button>
                 </div>
             </div>
-            {showOutput &&
-                <>
+            {showOutput && <>
                     <pre className={"output-window"}>
-                        {stdout}{<span style={{color: "var(--text-code-error)"}}>{stderr}</span>}
+                        {stdout}{
+                        <span style={{color: "var(--text-code-error)"}}>{stderr}</span>}
                     </pre>
-                </>
-            }
+            </>}
         </div>}
     </BrowserOnly>
 }
