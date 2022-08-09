@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import {useColorMode} from '@docusaurus/theme-common';
@@ -23,6 +23,10 @@ const editorOnLoad = editor => {
 export default function CodeEditor(props) {
     const [input, setInput] = useState(props.code.trimEnd());
     const [showOutput, setShowOutput] = useState(false);
+
+    useEffect(() => {
+        setInput(props.code.trimEnd())
+    }, [props.code])
 
     const {runPython, stdout, stderr, isLoading, isRunning} = usePython();
 
@@ -68,7 +72,7 @@ export default function CodeEditor(props) {
                     editorProps={{$blockScrolling: true}}
                     setOptions={editorOptions}
                 />
-                <div className={"button-container"}>
+                <div className={"button-container"} style={props.showButtons ? {opacity: 100} : {}}>
                     <button
                         className={"icon-button"}
                         disabled={isLoading || isRunning}
@@ -76,7 +80,7 @@ export default function CodeEditor(props) {
                         aria-label={"Run Code"}
                         title={"Run Code"}
                     >
-                        <span className={"icon"}>{"\u25B6"}</span>
+                        <span className={"icon lsf-icon"} title={"play"}></span>
                     </button>
                     <button
                         className={"icon-button"}
@@ -84,7 +88,7 @@ export default function CodeEditor(props) {
                         aria-label={"Reset Code Window"}
                         title={"Reset Code Window"}
                     >
-                        <span className={"icon"}>{"\u21BA"}</span>
+                        <span className={"icon lsf-icon"} title={"refresh"}></span>
                     </button>
                 </div>
             </div>
