@@ -227,6 +227,7 @@ pre > code {
 }
 
 .lsf, .lsf-icon:before {
+  font-feature-settings: "liga" 1;
   font-family: 'LigatureSymbols';
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
