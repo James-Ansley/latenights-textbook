@@ -169,7 +169,7 @@ But, make sure each line is indented and aligned to improve readability.
 After seeing the syntax for list and set comprehensions, it is reasonable to
 assume that tuples could be generated using the following syntax:
 
-```python
+```text
 (expression for expression in iterable if condition)
 ```
 
