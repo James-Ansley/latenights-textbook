@@ -25,7 +25,8 @@ export default function CodeEditor(props) {
     const [showOutput, setShowOutput] = useState(false);
 
     useEffect(() => {
-        setInput(props.code.trimEnd())
+        setInput(props.code.trimEnd());
+        setShowOutput(false)
     }, [props.code])
 
     const {runPython, stdout, stderr, isLoading, isRunning} = usePython();
