@@ -42,6 +42,7 @@ html[data-theme='dark'] {
 
 html[data-theme="dark"] {
   --text-color: rgba(255, 255, 255, 0.85);
+  --text-color-faded: rgba(255, 255, 255, 0.8);
   --text-color-alt: rgba(217, 217, 217, 0.85);
   --divider-color: hsla(0, 0%, 33%, 0.48);
   --divider-color-alt: hsla(0, 0%, 25%, 0.40);
@@ -60,6 +61,7 @@ body {
   text-align: justify;
   color: var(--text-color);
 }
+
 
 .theme-doc-markdown {
   max-width: 79ch;
@@ -119,6 +121,10 @@ body {
   pre {
     background-color: var(--code-background);
   }
+}
+
+html[data-theme='dark'] .diagram {
+  filter: invert(0.92) !important;
 }
 
 // Code Blocks

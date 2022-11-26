@@ -7,6 +7,11 @@
     width: 100%;
 }
 
+html[data-theme='dark'] .feedback {
+    color: var(--text-color-faded);
+    font-weight: lighter;
+}
+
 @media print {
     .feedback {
         display: none;
