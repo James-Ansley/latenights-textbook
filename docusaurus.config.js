@@ -41,6 +41,18 @@ const config = {
             },
         ],
         'docusaurus-plugin-sass',
+        async function disableUsedExports() {
+            return {
+                name: "disable-used-exports",
+                configureWebpack() {
+                    return {
+                        optimization: {
+                            usedExports: false,
+                        },
+                    };
+                },
+            };
+        },
     ],
 
     stylesheets: [

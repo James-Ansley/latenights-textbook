@@ -29,7 +29,14 @@ export default function CodeEditor(props) {
         setShowOutput(false)
     }, [props.code])
 
-    const {runPython, stdout, stderr, isLoading, isRunning} = usePython();
+    const {
+        runPython,
+        stdout,
+        stderr,
+        isLoading,
+        isRunning,
+        interruptExecution,
+    } = usePython();
 
     const {colorMode} = useColorMode();
     const isBrowser = useIsBrowser();
@@ -53,52 +60,71 @@ export default function CodeEditor(props) {
         return runPython(input);
     }
 
+    function stop() {
+        setShowOutput(false);
+        interruptExecution();
+    }
+
     return <BrowserOnly>
-        {() => <div className={"code-editor"}>
-            <div
-                className={"code-editor-window"}
-                style={showOutput ? {borderRadius: ".25em .25em 0 0"} : {}}
-            >
-                <AceEditor
-                    value={input}
-                    mode="python"
-                    name="CodeBlock"
-                    fontSize={'0.9rem'}
-                    theme={colorMode === 'dark' ? "idle_fingers" : "textmate"}
-                    onChange={(newValue, e) => setInput(newValue)}
-                    width='100%'
-                    maxLines={Infinity}
-                    style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
-                    onLoad={editorOnLoad}
-                    editorProps={{$blockScrolling: true}}
-                    setOptions={editorOptions}
-                />
-                <div className={"button-container"} style={props.showButtons ? {opacity: 100} : {}}>
-                    <button
-                        className={"icon-button"}
-                        disabled={isLoading || isRunning}
-                        onClick={run}
-                        aria-label={"Run Code"}
-                        title={"Run Code"}
-                    >
-                        <span className={"icon lsf-icon"} title={"play"}></span>
-                    </button>
-                    <button
-                        className={"icon-button"}
-                        onClick={reset}
-                        aria-label={"Reset Code Window"}
-                        title={"Reset Code Window"}
-                    >
-                        <span className={"icon lsf-icon"} title={"refresh"}></span>
-                    </button>
+        {
+            () => <div className={"code-editor"}>
+                <div
+                    className={"code-editor-window"}
+                    style={showOutput ? {borderRadius: ".25em .25em 0 0"} : {}}
+                >
+                    <AceEditor
+                        value={input}
+                        mode="python"
+                        name="CodeBlock"
+                        fontSize={'0.9rem'}
+                        theme={colorMode === 'dark' ? "idle_fingers" : "textmate"}
+                        onChange={(newValue, e) => setInput(newValue)}
+                        width='100%'
+                        maxLines={Infinity}
+                        style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
+                        onLoad={editorOnLoad}
+                        editorProps={{$blockScrolling: true}}
+                        setOptions={editorOptions}
+                    />
+                    <div className={"button-container"} style={props.showButtons ? {opacity: 100} : {}}>
+                        {!isRunning ?
+                            <button
+                                className={"icon-button"}
+                                disabled={isLoading || isRunning}
+                                onClick={run}
+                                aria-label={"Run Code"}
+                                title={"Run Code"}
+                            >
+                                <span className={"icon lsf-icon"} title={"play"}></span>
+                            </button>
+                            :
+                            <button
+                                className={"icon-button"}
+                                disabled={isLoading || !isRunning}
+                                onClick={stop}
+                                aria-label={"Stop Code"}
+                                title={"Stop Code"}
+                            >
+                                <span className={"icon lsf-icon"} title={"stop"}></span>
+                            </button>
+                        }
+                        <button
+                            className={"icon-button"}
+                            onClick={reset}
+                            aria-label={"Reset Code Window"}
+                            title={"Reset Code Window"}
+                        >
+                            <span className={"icon lsf-icon"} title={"refresh"}></span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            {showOutput && <>
+                {showOutput && (
                     <pre className={"output-window"}>
-                        {stdout}{
-                        <span style={{color: "var(--text-code-error)"}}>{stderr}</span>}
-                    </pre>
-            </>}
-        </div>}
+                        <span>{stdout}</span>
+                        <span style={{color: "var(--text-code-error)"}}>{stderr}</span>
+                </pre>
+                )}
+            </div>
+        }
     </BrowserOnly>
 }
