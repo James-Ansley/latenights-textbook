@@ -4,7 +4,7 @@ import {PythonProvider} from "react-py";
 export default function Root({children}) {
     return (
         <>
-            <PythonProvider lazy={true}>
+            <PythonProvider lazy={false}>
                 {children}
             </PythonProvider>
         </>
