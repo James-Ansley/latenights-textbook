@@ -6,6 +6,7 @@ export default function Root({children}) {
     useEffect(() => {
         setIsMobile(
             !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i)
+            || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
         )
     }, [])
     return (
