@@ -86,43 +86,51 @@ export default function CodeEditor(props) {
                         editorProps={{$blockScrolling: true}}
                         setOptions={editorOptions}
                     />
-                    <div className={"button-container"} style={props.showButtons ? {opacity: 100} : {}}>
-                        {!isRunning ?
-                            <button
-                                className={"icon-button"}
-                                disabled={isLoading || isRunning}
-                                onClick={run}
-                                aria-label={"Run Code"}
-                                title={"Run Code"}
-                            >
-                                <span className={"icon lsf-icon"} title={"play"}></span>
-                            </button>
-                            :
-                            <button
-                                className={"icon-button"}
-                                disabled={isLoading || !isRunning}
-                                onClick={stop}
-                                aria-label={"Stop Code"}
-                                title={"Stop Code"}
-                            >
-                                <span className={"icon lsf-icon"} title={"stop"}></span>
-                            </button>
+                    <div className={"button-container"}
+                         style={props.showButtons || navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i) ? {opacity: 100} : {}}>
+                        {isLoading ?
+                            (<span>Loading...</span>)
+                            : (
+                                <>
+                                    {!isRunning ?
+                                        <button
+                                            className={"icon-button"}
+                                            disabled={isLoading || isRunning}
+                                            onClick={run}
+                                            aria-label={"Run Code"}
+                                            title={"Run Code"}
+                                        >
+                                            <span className={"icon lsf-icon"} title={"play"}></span>
+                                        </button>
+                                        :
+                                        <button
+                                            className={"icon-button"}
+                                            disabled={isLoading || !isRunning}
+                                            onClick={stop}
+                                            aria-label={"Stop Code"}
+                                            title={"Stop Code"}
+                                        >
+                                            <span className={"icon lsf-icon"} title={"stop"}></span>
+                                        </button>
+                                    }
+                                    <button
+                                        className={"icon-button"}
+                                        onClick={reset}
+                                        aria-label={"Reset Code Window"}
+                                        title={"Reset Code Window"}
+                                    >
+                                        <span className={"icon lsf-icon"} title={"refresh"}></span>
+                                    </button>
+                                </>
+                            )
                         }
-                        <button
-                            className={"icon-button"}
-                            onClick={reset}
-                            aria-label={"Reset Code Window"}
-                            title={"Reset Code Window"}
-                        >
-                            <span className={"icon lsf-icon"} title={"refresh"}></span>
-                        </button>
                     </div>
                 </div>
                 {showOutput && (
                     <pre className={"output-window"}>
                         <span>{stdout}</span>
                         <span style={{color: "var(--text-code-error)"}}>{stderr}</span>
-                </pre>
+                    </pre>
                 )}
             </div>
         }
