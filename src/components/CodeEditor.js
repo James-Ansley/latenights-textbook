@@ -87,7 +87,8 @@ export default function CodeEditor(props) {
                         setOptions={editorOptions}
                     />
                     <div className={"button-container"}
-                         style={props.showButtons || navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i) ? {opacity: 100} : {}}>
+                         style={props.showButtons || !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i)
+                         || (navigator.userAgent.includes("Mac") && "ontouchend" in document) ? {opacity: 100} : {}}>
                         {isLoading ?
                             (<span>Loading...</span>)
                             : (
