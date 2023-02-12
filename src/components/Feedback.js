@@ -53,9 +53,9 @@ export const Feedback = (props) => {
                     <legend className="radio-label">Too Complex</legend>
                 </div>
 
-                <label className="prompt" htmlFor="suggestions">
+                <legend className="prompt">
                     Do you have any specific recommendations for improving this chapter?
-                </label>
+                </legend>
                 <textarea
                     className="text-input"
                     id="suggestions"
