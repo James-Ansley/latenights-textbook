@@ -7,8 +7,8 @@ import {usePython} from "react-py";
 import "./CodeEditor.css"
 
 const editorOptions = {
-    enableBasicAutocompletion: true,
-    enableLiveAutocompletion: true,
+    enableBasicAutocompletion: false,
+    enableLiveAutocompletion: false,
     highlightActiveLine: false,
     showPrintMargin: false,
     showGutter: false,
