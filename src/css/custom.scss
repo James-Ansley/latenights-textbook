@@ -167,7 +167,7 @@ pre > code {
   background-color: var(--ifm-background-surface-color);
 
   * {
-    font-size: 0.97em;
+    font-size: 0.99em;
   }
 
   .theme-doc-sidebar-item-category {
@@ -203,6 +203,10 @@ pre > code {
 .footer {
   --ifm-footer-background-color: var(--ifm-background-surface-color);
   color: currentColor;
+}
+
+.table-of-contents {
+  text-align: left;
 }
 
 .pagination-nav,

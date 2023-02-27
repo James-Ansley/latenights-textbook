@@ -13,7 +13,9 @@ export default function Root({children}) {
         isMobile === undefined ? (
             <>{children}</>
         ) : (
-            <PythonProvider lazy={isMobile} terminateOnCompletion={isMobile}>
+            // Lazy = true until loading times are figured out.
+            <PythonProvider lazy={true} terminateOnCompletion={isMobile}>
+            {/*<PythonProvider lazy={isMobile} terminateOnCompletion={isMobile}>*/}
                 {children}
             </PythonProvider>
         )

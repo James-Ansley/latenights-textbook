@@ -292,8 +292,49 @@ x = 1234567890
 print(f"{x:,}")  # 1,234,567,890
 ```
 
-Here the comma (`,`) indicates commas should be used to group every 
-thousands block in the number.
+Here the comma (`,`) indicates commas should be used to group every
+thousand's block in the number.
+
+### Using Variables in Format Specifiers
+
+So far, we have been using variables in the _expression_ (left side)
+component of replacement fields.
+But, we've been hard-coding values in the _format specifier_ (right side).
+
+Let's see what happens if we try to use a variable in a format specifier to
+set the width of a replacement field:
+
+```python
+cat = "Spoons"
+
+print(f"My cat is called: {cat:*^20}!")  # no variables
+# My cat is called: *******Spoons*******!
+
+width = 20
+print(f"My cat is called: {cat:*^width}!")  # using a variable?
+# ValueError: Invalid format specifier
+```
+
+The first format string using hard coded values works, but for the second
+string we get a`ValueError` telling us there is something wrong with our format
+specifier!
+
+Since format specifiers are so finicky with their syntax, Python can't
+automatically tell whether something in the format specifier is a variable
+or one of the many format options.
+To indicate that a value in a format specifier is a variable, it needs to be
+wrapped in curly brackets (`{variable}`).
+For example:
+
+```python
+cat = "Spoons"
+width = 20
+
+print(f"My cat is called: {cat:*^{width}}!")  # using a variable
+# My cat is called: *******Spoons*******!
+```
+
+Now our string displays correctly!
 
 ## String Formatting FAQs
 
@@ -303,8 +344,9 @@ To put curly braces `{` or `}` into a format string or f-string, you simply need
 to double them up in the string:
 
 ```python
-pi = 3.141
-print(f"{{math.pi}} == {pi:.2f}")  # {math.pi} == 3.14
+message = "in a format string"
+print(f"Look! }} a curly bracket {message}! {{ And another one!")
+# My cat is called: *******Spoons*******!
 ```
 
 [^1]: Confusingly, the strings used in the `str.format()` method are called
