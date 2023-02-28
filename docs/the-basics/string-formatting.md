@@ -203,15 +203,71 @@ alignment[^4].
 
 ### Formatting Numbers
 
-String formatting also allows us to control the _precision_ and notation of
-numbers.
+When formatting numbers, a _presentation type_ can be provided that changes
+the way the number is displayed.
+Python has several ways to format integers and floats, and while it is not
+common to use all of these presentation types all the time, they are useful
+to know about.
+An overview of several presentation types is below (note the letters at the
+end of the replacement fields).
+
+There are various presentation types for integers:
+
+```python
+number = 123_456
+
+print(f"No Format: {number}") # 123456
+
+print(f"  Decimal: {number:d}")  # 123456  (this is optional/default)
+print(f"   Binary: {number:b}")  # 11110001001000000
+print(f"    Octal: {number:o}")  # 361100
+print(f"      Hex: {number:x}")  # 1e240
+print(f"Upper Hex: {number:X}")  # 1E240
+```
+
+And, for floats (note – a precision can be specified for floats, here its
+3dp/sf):
+
+```python
+small = 0.0123456
+big = 123_456.789
+
+print(f"  No Format: {small:>9.3} / {big:.3}")  # 0.0123 / 1.23e+05
+
+print(f"    General: {small:>9.3g} / {big:.3g}")  #    0.0123 / 1.23e+05
+print(f"  Upper Gen: {small:>9.3G} / {big:.3G}")  #    0.0123 / 1.23E+05
+print(f"Fixed Point: {small:>9.3f} / {big:.3f}")  #     0.012 / 123456.789
+print(f"Upper Fixed: {small:>9.3F} / {big:.3F}")  #     0.012 / 123456.789
+print(f" Scientific: {small:>9.3e} / {big:.3e}")  # 1.235e-02 / 1.235e+05
+print(f"  Upper Sci: {small:>9.3E} / {big:.3E}")  # 1.235E-02 / 1.235E+05
+print(f"    Percent: {small:>9.3%} / {big:.3%}")  #    1.235% / 12345678.900%
+```
+
+Note: `ints` can be formatted with `float` presentation types, but not the
+other way around. e.g. you can format an integer as: `{10:.3e}` but you
+can't format a float as: `{3.14:b}`.
+
+The presentation type that is used most often is the fixed point presentation
+type (`f`) which allows numbers to be rounded to a specified number of
+decimal places.
+For complete descriptions of the presentation types [see the python format
+specification docs](https://docs.python.org/3/library/string.html#formatspec).
 
 #### Rounding
 
-To round numbers two things need to be included in the format specifier:
+When rounding values there are two things to be aware of:
 
 - A _presentation type_ to specify that the replacement field is for float types
-- A _precision_ that indicates how many decimal places should be displayed[^5]
+- A _precision_ that indicates either the number of significant figures or
+  decimal places that should be presented depending on the display type.
+
+Different presentation types will treat the precision differently.
+
+##### Rounding Decimal Places
+
+Most common is to round a value to a given number of decimal places.
+To round to a given number of decimal places, the _fixed point_ presentation
+type (`f` or `F`) can be used.
 
 Consider the following example from before:
 
@@ -221,11 +277,12 @@ print(f"Pi to two decimal places is: {pi:.2f}")
 ```
 
 Here, the format specifier is `.2f`.
-The `f` is a presentation type used for floating point numbers[^6].
+The `f` is a presentation type used for fixed point numbers – i.e.
+displaying numbers to a fixed number of decimal places.
 And the `.2` specifies a precision of two decimal places.
 
-By specifying a precision, numbers are padded with extra 0s if they do not have
-enough decimal places or are integers:
+By specifying a precision, numbers are padded with extra 0s at the end if
+they do not have enough decimal places:
 
 ```python
 x = 5
@@ -240,7 +297,7 @@ include explicit signs, or use thousands separators among other things.
 ##### Scientific Notation
 
 To display numbers in scientific notation, the "e" presentation type can
-be used[^7]:
+be used:
 
 ```python
 speed_of_light_m_s = 299792458
@@ -294,6 +351,52 @@ print(f"{x:,}")  # 1,234,567,890
 
 Here the comma (`,`) indicates commas should be used to group every
 thousand's block in the number.
+
+##### Padding With 0's
+
+In the [rounding decimal places](#rounding-decimal-places) section, it was
+shown that you can pad a number with extra decimal point 0's.
+It is possible to pad the left side of a number with 0s too to fit a certain
+width.
+
+To do this, a `0` needs to be inserted before a width specifier.
+For example:
+
+```python
+print(f"{123:06}")  # 000123
+```
+
+Prefixing the width number with a `0` character produces _sign aware_ padding.
+This means if a sign is present, the leftmost `0` is replaced with the sign:
+
+```python
+print(f"{123:+06}")   # +00123
+print(f"{-123:+06}")  # -00123
+print(f"{123:-06}")   # 000123
+print(f"{-123:-06}")  # -00123
+print(f"{123: 06}")   #  00123
+print(f"{-123: 06}")  # -00123
+```
+
+Fixed point values can also be left-padded with 0's.
+The width parameter will need to account for any decimal points, fractional
+digits, and signs. For example, lets format a float to have four decimal
+points, the space sign specifier, and 12 whole digits. And, just for fun, a
+comma thousands separator:
+
+```python
+number = 123_456_789.123
+print(f"{number: 021,.4f}")   #  000,123,456,789.1230
+print(f"{-number: 021,.4f}")  # -000,123,456,789.1230
+```
+
+Check the [format specifier](#format-specifiers) section to see why the
+comma is placed between the width and precision.
+
+To calculate the width it is `+1` for the sign, `+1` for the decimal point,
+`+3` for the thousand's separators, `+4` for the fractional part, `+12` for
+the whole digits.
+Coming to a total of $1 + 1 + 3 + 4 + 12 = 21$
 
 ### Using Variables in Format Specifiers
 
@@ -378,6 +481,7 @@ common.
     create the f-string:
     
     ```python
+    values = ["a", "b", "c"]
     print(f"The values are {', '.join(values)}")
     ```
     
@@ -403,19 +507,6 @@ common.
     
     Here the `06` indicates we want the string to be at least 6 characters wide
     (including the decimal point), with 0s as the padding character.
-
-[^5]: This is generally only true for the fixed-point presentation type "f".
-See the [Python docs][format-string-mini-language] for more on how precision is
-used for other presentation types
-
-[^6]: There are several presentation types for floats.
-"f" or the _fixed point_ precision type is the most common for floats and
-simplest to use.
-See the [Python docs][format-string-mini-language] for the full list and
-descriptions of presentation types.
-
-[^7]: An uppercase "E" can also be used.
-This just displays the separator character as "E" instead of "e".
 
 [f-strings]: https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings
 

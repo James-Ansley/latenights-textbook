@@ -54,7 +54,7 @@ export const Feedback = (props) => {
                 </div>
 
                 <legend className="prompt">
-                    Do you have any specific recommendations for improving this chapter?
+                    Do you have any comments or recommendations for improving this chapter?
                 </legend>
                 <textarea
                     className="text-input"

@@ -9,11 +9,12 @@ export default function Root({children}) {
             || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
         )
     }, [])
+    const isDev = process.env.NODE_ENV === 'development'
     return (
         isMobile === undefined ? (
             <>{children}</>
         ) : (
-            <PythonProvider lazy={isMobile} terminateOnCompletion={isMobile}>
+            <PythonProvider lazy={isMobile || isDev} terminateOnCompletion={isMobile}>
                 {children}
             </PythonProvider>
         )
