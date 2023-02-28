@@ -65,7 +65,7 @@ export default function CodeEditor(props) {
         interruptExecution();
     }
 
-    return <BrowserOnly fallback={<pre>{input}</pre>}>
+    return <BrowserOnly fallback={<pre style={{margin: 0, padding: "0.55rem"}}>{input}</pre>}>
         {
             () => <div className={"code-editor"}>
                 <div
