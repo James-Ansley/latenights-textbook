@@ -449,7 +449,7 @@ to double them up in the string:
 ```python
 message = "in a format string"
 print(f"Look! }} a curly bracket {message}! {{ And another one!")
-Look! } a curly bracket in a format string! { And another one!
+# Look! } a curly bracket in a format string! { And another one!
 ```
 
 [^1]: Confusingly, the strings used in the `str.format()` method are called
