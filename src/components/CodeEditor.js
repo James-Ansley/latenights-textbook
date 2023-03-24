@@ -110,83 +110,89 @@ export default function CodeEditor(props) {
         interruptExecution();
     }
 
-    return <BrowserOnly fallback={<pre style={{
-        margin: 0,
-        padding: "0.55rem"
-    }}>{input}</pre>}>
-        {
-            () => <div className={"code-editor"}>
-                <div
-                    className={"code-editor-window"}
-                    style={showOutput ? {borderRadius: ".25em .25em 0 0"} : {}}
+    function buttons() {
+        return <>
+            {!isRunning ?
+                <button
+                    className={"icon-button"}
+                    disabled={isLoading || isRunning}
+                    onClick={run}
+                    onFocus={() => setplayFocus(true)}
+                    onBlur={() => setplayFocus(false)}
+                    aria-label={"Run Code"}
+                    title={"Run Code"}
                 >
-                    <AceEditor
-                        value={input}
-                        mode="python"
-                        name="CodeBlock"
-                        fontSize={'0.9rem'}
-                        theme={colorMode === 'dark' ? "idle_fingers" : "textmate"}
-                        onChange={(newValue, e) => setInput(newValue)}
-                        width='100%'
-                        maxLines={Infinity}
-                        style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
-                        onLoad={editorOnLoad}
-                        editorProps={{$blockScrolling: true}}
-                        setOptions={editorOptions}
-                    />
-                    <div className={"button-container"}
-                         style={props.showButtons || isMobile() || playFocus || resetFocus ? {opacity: 100} : {}}>
-                        {isLoading ?
-                            (<span>Loading...</span>)
-                            : (
-                                <>
-                                    {!isRunning ?
-                                        <button
-                                            className={"icon-button"}
-                                            disabled={isLoading || isRunning}
-                                            onClick={run}
-                                            onFocus={() => setplayFocus(true)}
-                                            onBlur={() => setplayFocus(false)}
-                                            aria-label={"Run Code"}
-                                            title={"Run Code"}
-                                        >
-                                            <span className={"icon lsf-icon"} title={"play"}></span>
-                                        </button>
-                                        :
-                                        <button
-                                            className={"icon-button"}
-                                            disabled={isLoading || !isRunning}
-                                            onClick={stop}
-                                            onFocus={() => setplayFocus(true)}
-                                            onBlur={() => setplayFocus(false)}
-                                            aria-label={"Stop Code"}
-                                            title={"Stop Code"}
-                                        >
-                                            <span className={"icon lsf-icon"} title={"stop"}></span>
-                                        </button>
-                                    }
-                                    <button
-                                        className={"icon-button"}
-                                        onClick={reset}
-                                        onFocus={() => setresetFocus(true)}
-                                        onBlur={() => setresetFocus(false)}
-                                        aria-label={"Reset Code Window"}
-                                        title={"Reset Code Window"}
-                                    >
-                                        <span className={"icon lsf-icon"} title={"refresh"}></span>
-                                    </button>
-                                </>
-                            )
-                        }
+                    <span className={"icon lsf-icon"} title={"play"}></span>
+                </button>
+                :
+                <button
+                    className={"icon-button"}
+                    disabled={isLoading || !isRunning}
+                    onClick={stop}
+                    onFocus={() => setplayFocus(true)}
+                    onBlur={() => setplayFocus(false)}
+                    aria-label={"Stop Code"}
+                    title={"Stop Code"}
+                >
+                    <span className={"icon lsf-icon"} title={"stop"}></span>
+                </button>
+            }
+            <button
+                className={"icon-button"}
+                onClick={reset}
+                onFocus={() => setresetFocus(true)}
+                onBlur={() => setresetFocus(false)}
+                aria-label={"Reset Code Window"}
+                title={"Reset Code Window"}
+            >
+                <span className={"icon lsf-icon"} title={"refresh"}></span>
+            </button>
+        </>;
+    }
+
+    function output() {
+        return (
+            <pre className={"output-window"}>
+                <span>{stdout}</span>
+                <span style={{color: "var(--text-code-error)"}}>{stderr}</span>
+            </pre>
+        );
+    }
+
+    function editor() {
+        return <AceEditor
+            value={input}
+            mode="python"
+            name="CodeBlock"
+            fontSize={'0.9rem'}
+            theme={colorMode === 'dark' ? "idle_fingers" : "textmate"}
+            onChange={(newValue, e) => setInput(newValue)}
+            width='100%'
+            maxLines={Infinity}
+            style={{backgroundColor: "rgba(0, 0, 0, 0)"}}
+            onLoad={editorOnLoad}
+            editorProps={{$blockScrolling: true}}
+            setOptions={editorOptions}
+        />;
+    }
+
+    function showButtons() {
+        return props.showButtons || isMobile() || playFocus || resetFocus;
+    }
+
+    const fallback = <pre style={{margin: 0, padding: "0.55rem"}}>{input}</pre>;
+    
+    return <BrowserOnly fallback={fallback}>
+        {() => (
+            <div className={"code-editor"}>
+                <div className={"code-editor-window"} style={showOutput ? {borderRadius: ".25em .25em 0 0"} : {}}>
+                    {editor()}
+                    <div className={"button-container"} style={showButtons() ? {opacity: 100} : {}}>
+                        {isLoading ? <span>Loading...</span> : buttons()}
                     </div>
                 </div>
-                {showOutput && (
-                    <pre className={"output-window"}>
-                        <span>{stdout}</span>
-                        <span style={{color: "var(--text-code-error)"}}>{stderr}</span>
-                    </pre>
-                )}
+                {showOutput && output()}
             </div>
-        }
+        )}
     </BrowserOnly>
 }
