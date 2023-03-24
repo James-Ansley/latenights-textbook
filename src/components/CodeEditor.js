@@ -14,15 +14,60 @@ const editorOptions = {
     showGutter: false,
 };
 
+function setCommandEnabled(editor, name, enabled) {
+    // See: https://stackoverflow.com/a/24963811/18307756
+    let command = editor.commands.byName[name]
+    if (!command.bindKeyOriginal)
+        command.bindKeyOriginal = command.bindKey
+    command.bindKey = enabled ? command.bindKeyOriginal : null;
+    editor.commands.addCommand(command);
+}
+
 const editorOnLoad = editor => {
     editor.renderer.setScrollMargin(10, 10, 0, 0);
     editor.renderer.setPadding(16);
     editor.moveCursorTo(0, 0);
+
+    setCommandEnabled(editor, "indent", false);
+    setCommandEnabled(editor, "outdent", false);
+
+    editor.commands.on("afterExec", eventData => {
+        if (eventData.command.name !== "disable-indent") {
+            setCommandEnabled(editor, "indent", true);
+            setCommandEnabled(editor, "outdent", true);
+        }
+    });
+
+    editor.on("click", (e) => {
+        setCommandEnabled(editor, "indent", true);
+        setCommandEnabled(editor, "outdent", true);
+    })
+
+    editor.on("blur", (e) => {
+        setCommandEnabled(editor, "indent", false);
+        setCommandEnabled(editor, "outdent", false);
+    })
+
+    editor.commands.addCommand({
+        name: 'disable-indent',
+        bindKey: {win: "esc", mac: "esc"},
+        exec: (editor) => {
+            setCommandEnabled(editor, "indent", false);
+            setCommandEnabled(editor, "outdent", false);
+        }
+    })
 };
+
+const isMobile = () => (
+    !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i)
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+)
 
 export default function CodeEditor(props) {
     const [input, setInput] = useState(props.code.trimEnd());
     const [showOutput, setShowOutput] = useState(false);
+    const [playFocus, setplayFocus] = useState(false);
+    const [resetFocus, setresetFocus] = useState(false);
 
     useEffect(() => {
         setInput(props.code.trimEnd());
@@ -65,7 +110,10 @@ export default function CodeEditor(props) {
         interruptExecution();
     }
 
-    return <BrowserOnly fallback={<pre style={{margin: 0, padding: "0.55rem"}}>{input}</pre>}>
+    return <BrowserOnly fallback={<pre style={{
+        margin: 0,
+        padding: "0.55rem"
+    }}>{input}</pre>}>
         {
             () => <div className={"code-editor"}>
                 <div
@@ -87,8 +135,7 @@ export default function CodeEditor(props) {
                         setOptions={editorOptions}
                     />
                     <div className={"button-container"}
-                         style={props.showButtons || !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i)
-                         || (navigator.userAgent.includes("Mac") && "ontouchend" in document) ? {opacity: 100} : {}}>
+                         style={props.showButtons || isMobile() || playFocus || resetFocus ? {opacity: 100} : {}}>
                         {isLoading ?
                             (<span>Loading...</span>)
                             : (
@@ -98,6 +145,8 @@ export default function CodeEditor(props) {
                                             className={"icon-button"}
                                             disabled={isLoading || isRunning}
                                             onClick={run}
+                                            onFocus={() => setplayFocus(true)}
+                                            onBlur={() => setplayFocus(false)}
                                             aria-label={"Run Code"}
                                             title={"Run Code"}
                                         >
@@ -108,6 +157,8 @@ export default function CodeEditor(props) {
                                             className={"icon-button"}
                                             disabled={isLoading || !isRunning}
                                             onClick={stop}
+                                            onFocus={() => setplayFocus(true)}
+                                            onBlur={() => setplayFocus(false)}
                                             aria-label={"Stop Code"}
                                             title={"Stop Code"}
                                         >
@@ -117,6 +168,8 @@ export default function CodeEditor(props) {
                                     <button
                                         className={"icon-button"}
                                         onClick={reset}
+                                        onFocus={() => setresetFocus(true)}
+                                        onBlur={() => setresetFocus(false)}
                                         aria-label={"Reset Code Window"}
                                         title={"Reset Code Window"}
                                     >
