@@ -181,10 +181,13 @@ export default function CodeEditor(props) {
     }
 
     const fallback = <pre style={{margin: 0, padding: "0.55rem"}}>{input}</pre>;
-    
+
     return <BrowserOnly fallback={fallback}>
         {() => (
-            <div className={"code-editor"}>
+            <div className={"code-editor"} onMouseLeave={() => {
+                setplayFocus(false);
+                setresetFocus(false);
+            }}>
                 <div className={"code-editor-window"} style={showOutput ? {borderRadius: ".25em .25em 0 0"} : {}}>
                     {editor()}
                     <div className={"button-container"} style={showButtons() ? {opacity: 100} : {}}>
